@@ -11,6 +11,7 @@
     <AssemblyName>BVNetwork.404Handler.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -210,13 +211,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="packages.BVNetwork.404Handler.Tests.Cms10.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\BVNetwork.404Handler.csproj">
+    <ProjectReference Include="..\src\BVNetwork.404Handler.Cms10.csproj">
       <Project>{dfbf0553-7e44-44bf-a59f-f94f9493fc17}</Project>
-      <Name>BVNetwork.404Handler</Name>
+      <Name>BVNetwork.404Handler.Cms10</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -18,8 +18,10 @@ using EPiServer.Shell.Gadgets;
 namespace BVNetwork.NotFound.Controllers
 {
     [EPiServer.Shell.Web.ScriptResource("ClientResources/Scripts/jquery.blockUI.js")]
+#pragma warning disable 618 // TODO: rewrite with Episerver Components
     [Gadget(ResourceType = typeof(NotFoundRedirectController),
            NameResourceKey = "GadgetName", DescriptionResourceKey = "GadgetDescription")]
+#pragma warning restore 618
     [EPiServer.Shell.Web.CssResource("ClientResources/Content/RedirectGadget.css")]
     [EPiServer.Shell.Web.ScriptResource("ClientResources/Scripts/jquery.form.js")]
     [Authorize]
@@ -97,7 +99,9 @@ namespace BVNetwork.NotFound.Controllers
             return Index(null, "", null, true, true);
         }
 
+#pragma warning disable 618 // TODO: rewrite with Episerver Components
         [GadgetAction(Text = "Administer")]
+#pragma warning restore 618
         public ActionResult Administer()
         {
             CheckAccess();
@@ -173,8 +177,13 @@ namespace BVNetwork.NotFound.Controllers
         /// <param name="pageNumber">The current page number for the pager view</param>
         /// <param name="redirectList">The List of redirects</param>
         /// <param name="actionInformation">Text that will be presented in the view</param>
+        /// <param name="searchWord"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="isSuggestions"></param>
+        /// <param name="showRedirects"></param>
         /// <returns></returns>
-        public RedirectIndexViewData GetRedirectIndexViewData(int? pageNumber, List<CustomRedirect> redirectList, string actionInformation, string searchWord, int? pageSize, bool isSuggestions, bool? showRedirects)
+        public RedirectIndexViewData GetRedirectIndexViewData(int? pageNumber, List<CustomRedirect> redirectList, string actionInformation,
+            string searchWord, int? pageSize, bool isSuggestions, bool? showRedirects)
         {
             RedirectIndexViewData indexData = new RedirectIndexViewData();
             indexData.IsSuggestions = isSuggestions;
@@ -347,6 +356,7 @@ namespace BVNetwork.NotFound.Controllers
         /// </summary>
         /// <param name="searchWord"></param>
         /// <param name="count"></param>
+        /// <param name="isSuggestions"></param>
         /// <returns></returns>
         public string GetSearchResultInfo(string searchWord, int count, bool isSuggestions)
         {
