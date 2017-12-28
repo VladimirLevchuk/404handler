@@ -46,7 +46,7 @@
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <ConfigurationOverrideFile>
     </ConfigurationOverrideFile>
-    <DefineConstants>TRACE;DEBUG;CMS11</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;CMS10</DefineConstants>
     <DocumentationFile>
     </DocumentationFile>
     <DebugSymbols>true</DebugSymbols>
@@ -70,7 +70,7 @@
     <CheckForOverflowUnderflow>false</CheckForOverflowUnderflow>
     <ConfigurationOverrideFile>
     </ConfigurationOverrideFile>
-    <DefineConstants>TRACE;CMS11</DefineConstants>
+    <DefineConstants>TRACE;CMS10</DefineConstants>
     <DocumentationFile>
     </DocumentationFile>
     <DebugSymbols>false</DebugSymbols>
@@ -88,7 +88,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.Cms11.cs" />
+    <Compile Include="AssemblyInfo.Cms10.cs" />
     <Compile Include="Core\CustomRedirects\XmlActionResult.cs" />
     <Compile Include="Core\Initialization\Custom404HandlerInitialization.cs" />
     <Compile Include="Core\Logging\LogEvent.cs" />
@@ -105,7 +105,7 @@
     </Content>
     <None Include=".editorconfig" />
     <None Include="app.config" />
-    <None Include="packages.BVNetwork.404Handler.config" />
+    <None Include="packages.BVNetwork.404Handler.Cms10.config" />
     <None Include="Views\NotFoundRedirect\Deleted.ascx">
       <SubType>ASPXCodeBehind</SubType>
     </None>
@@ -192,7 +192,7 @@
     <Compile Include="Core\NotFoundPage\NotFoundBase.cs">
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Content Include="BVNetwork.404Handler.nuspec">
+    <Content Include="BVNetwork.404Handler.Cms10.nuspec">
       <SubType>Designer</SubType>
     </Content>
     <None Include="CustomRedirects.config" />

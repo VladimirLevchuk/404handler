@@ -17,7 +17,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;CMS11</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;CMS10</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -25,7 +25,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;CMS11</DefineConstants>
+    <DefineConstants>TRACE;CMS10</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -211,7 +211,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.BVNetwork.404Handler.Tests.config" />
+    <None Include="packages.BVNetwork.404Handler.Tests.Cms10.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\src\BVNetwork.404Handler.csproj">
