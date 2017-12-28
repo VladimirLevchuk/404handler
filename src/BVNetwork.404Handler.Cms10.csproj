@@ -104,7 +104,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <None Include=".editorconfig" />
-    <None Include="app.config" />
     <None Include="packages.BVNetwork.404Handler.Cms10.config" />
     <None Include="Views\NotFoundRedirect\Deleted.ascx">
       <SubType>ASPXCodeBehind</SubType>
