@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>BVN.404Handler</id>
+        <title>$title$</title>
+        <version>$version$</version>
+        <authors>$author$</authors>
+        <owners>$author$</owners>
+        <licenseUrl>https://www.coderesort.com/p/epicode/wiki/EpicodeLicense</licenseUrl>
+        <projectUrl>https://github.com/BVNetwork/404handler</projectUrl>
+        <iconUrl>http://www.coderesort.com/favicon.ico</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>$description$</description>
+        <summary>The popular 404 handler for EPiServer, enabling better control over your 404 page in addition to allowing redirects for old urls that no longer works.</summary>
+        <language>en-US</language>
+      <dependencies>
+        <dependency id="EPiServer.CMS.UI.Core" version="[10.0.2, 11.0)" />
+        <dependency id="EPiServer.Framework" version="[10.4.0, 11.0)" />
+      </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\$configuration$\BVNetwork.404Handler.zip" target="content\modules\_protected\BVNetwork.404Handler\" />
+        <file src="readme.txt" target="" />
+    </files>
+</package>

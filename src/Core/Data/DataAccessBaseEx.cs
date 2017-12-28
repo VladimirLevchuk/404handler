@@ -10,7 +10,7 @@ namespace BVNetwork.NotFound.Core.Data
 {
     public class DataAccessBaseEx  : EPiServer.DataAccess.DataAccessBase
     {
-#if CMS10
+#if CMS10 || CMS11
         public DataAccessBaseEx(EPiServer.Data.IDatabaseExecutor handler)
 #else
         private IDatabaseHandler Executor
