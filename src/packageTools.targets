@@ -11,7 +11,7 @@
 
 	<PropertyGroup>
 		<NugetCommand>
-			"$(NuGetExe)" pack "$(ProjectDir)\$(ProjectName).csproj" -OutputDirectory "$(PackageOutDir.TrimEnd('\\'))" -Properties Configuration=$(Configuration)
+			"$(NuGetExe)" pack "$(ProjectDir)\$(ProjectName).csproj" -Symbols -OutputDirectory "$(PackageOutDir.TrimEnd('\\'))" -Properties Configuration=$(Configuration)
 		</NugetCommand>
 	</PropertyGroup>
 
