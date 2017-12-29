@@ -92,6 +92,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AssemblyInfo.Cms11.cs" />
     <Compile Include="Core\CustomRedirects\XmlActionResult.cs" />
     <Compile Include="Core\Initialization\Custom404HandlerInitialization.cs" />
     <Compile Include="Core\Logging\LogEvent.cs" />
@@ -106,7 +107,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Content>
     <None Include=".editorconfig" />
-    <None Include="BVNetwork.404Handler.Version.targets" />
     <None Include="packages.BVNetwork.404Handler.config" />
     <None Include="Views\NotFoundRedirect\Deleted.ascx">
       <SubType>ASPXCodeBehind</SubType>
@@ -199,7 +199,7 @@
     </Content>
     <None Include="CustomRedirects.config" />
     <None Include="module.config" />
-    <None Include="web.config.install.xdt" />
+    <Content Include="web.config.install.xdt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
@@ -380,6 +380,8 @@
     <Delete Files="$(zipFile)" />
     <!-- Create the Zip file -->
     <ZipDirectory InputPath="$(TmpOutDir)\content" OutputFileName="$(zipFile)" OverwriteExistingFile="true" />
+    <!-- Create the package -->
+    <Exec Command="$(NugetCommand)" />
     <!-- Cleanup -->
     <RemoveDir Directories="$(TmpOutDir)" />
   </Target>
