@@ -47,8 +47,7 @@ namespace BVNetwork.NotFound.Core.CustomRedirects
         /*[CanBeNull]*/
         private CustomRedirect TryLookup(/*[NotNull]*/ string url)
         {
-            CustomRedirect foundRedirect = null;
-            _quickLookupTable.TryGetValue(GetLookupKey(url), out foundRedirect);
+            _quickLookupTable.TryGetValue(GetLookupKey(url), out var foundRedirect);
             return foundRedirect;
         }
 
@@ -184,11 +183,11 @@ namespace BVNetwork.NotFound.Core.CustomRedirects
             {
                 if (!redirect.WildCardSkipAppend)
                 {
-                    //    // We need to append the 404 to the end of the
-                    //    // new one. Make a copy of the redir object as we
-                    //    // are changing it.
+                    // We need to append the 404 to the end of the
+                    // new one. Make a copy of the redir object as we
+                    // are changing it.
                     var url = urlNotFound.ToString();
-                    CustomRedirect redirCopy = new CustomRedirect(redirect);
+                    var redirCopy = new CustomRedirect(redirect);
                     var urlFromRule = UrlStandardizer.Standardize(redirect.OldUrl);
 
                     var append = IsAbsoluteUrl(urlFromRule) ? url.Substring(urlFromRule.Length) : urlNotFound.PathAndQuery.Substring(urlFromRule.Length);
@@ -213,12 +212,34 @@ namespace BVNetwork.NotFound.Core.CustomRedirects
                    || url.StartsWith("https://", StringComparison.InvariantCultureIgnoreCase);
         }
 
+        /// <summary>
+        /// Merges query parameters from the http request with ones from the redirect rule (the target query takes precedence).  
+        /// For instance: 
+        /// <list type="bullet">
+        ///     <item>
+        ///         <term>Rule:</term>
+        ///         <description>http://mysite/test => http://mysite?a=1&amp;b=2</description>
+        ///     </item>
+        ///     <item>
+        ///         <term>Request:</term>
+        ///         <description>http://mysite/test?a=0&amp;x=0</description>
+        ///     </item>
+        ///     <item>
+        ///         <term>Result:</term>
+        ///         <description>a=1&amp;b=2&amp;x=0 </description>
+        ///     </item>
+        /// </list>
+        /// </summary>
+        /// <param name="targetQuery">The target query as it's specified in the redirect rule</param>
+        /// <param name="originalQuery">The original query from http request</param>
+        /// <returns>Returns the merged query string parameters that can be appended to the url</returns>
         /*[NotNull]*/
         private string Merge(/*[NotNull]*/ NameValueCollection targetQuery, /*[NotNull]*/ NameValueCollection originalQuery)
         {
             if (targetQuery == null) throw new ArgumentNullException(nameof(targetQuery));
             if (originalQuery == null) throw new ArgumentNullException(nameof(originalQuery));
 
+            // append all keys from the original query that are not present in the target one, and all the target query keys
             var appendQueryArray = originalQuery.AllKeys.Where(x => targetQuery[x] == null)
                 .Select(x => $"{HttpUtility.UrlEncode(x)}={HttpUtility.UrlEncode(originalQuery[x])}").ToArray();
             var query = string.Join("&", appendQueryArray);
@@ -245,36 +266,20 @@ namespace BVNetwork.NotFound.Core.CustomRedirects
             // redirect using the <new> url as is, or we'll append the 404
             // url to the <new> url.
 
-            foreach (KeyValuePair<string, CustomRedirect> pair in _quickLookupTable)
+            foreach (var pair in _quickLookupTable)
             {
                 var redirect = pair.Value;
                 if (redirect.ExactMatch)
-                    continue; // todo: [low] performance issue: we can store only non-exact-mathces separately
+                    continue; 
                 // See if this "old" url (the one that cannot be found) starts with one 
                 if (url.StartsWith(pair.Key, StringComparison.InvariantCultureIgnoreCase))
                 {
-                    foundRedirect = redirect;
                     if (redirect.State == (int)DataStoreHandler.State.Ignored)
                     {
                         return null;
                     }
 
                     return redirect;
-                    //if (redirect.WildCardSkipAppend == true)
-                    //{
-                    //    // We'll redirect without appending the 404 url
-                    //    return redirect;
-                    //}
-                    //else
-                    //{
-                    //    return redirect;
-                    //    // We need to append the 404 to the end of the
-                    //    // new one. Make a copy of the redir object as we
-                    //    // are changing it.
-                    //    CustomRedirect redirCopy = new CustomRedirect(redirect);
-                    //    redirCopy.NewUrl = redirCopy.NewUrl + url.Substring(pair.Key.Length);
-                    //    return redirCopy;
-                    //}
                 }
             }
             return null;
