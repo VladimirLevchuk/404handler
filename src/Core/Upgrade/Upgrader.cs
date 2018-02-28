@@ -29,12 +29,15 @@ namespace BVNetwork.NotFound.Core.Upgrade
             var dba = DataAccessBaseEx.GetWorker();
 
             Log.Information("Create 404 handler redirects table START");
-            var createTableScript = @"CREATE TABLE [dbo].[BVN.NotFoundRequests](
-	                                    [ID] [int] IDENTITY(1,1) NOT NULL,
-	                                    [OldUrl] [nvarchar](2000) NOT NULL,
-	                                    [Requested] [datetime] NULL,
-	                                    [Referer] [nvarchar](2000) NULL
-                                        ) ON [PRIMARY]";
+            var createTableScript = @"IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[BVN.NotFoundRequests]') AND type in (N'U'))
+BEGIN
+CREATE TABLE [dbo].[BVN.NotFoundRequests](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[OldUrl] [nvarchar](2000) NOT NULL,
+	[Requested] [datetime] NULL,
+	[Referer] [nvarchar](2000) NULL
+) ON [PRIMARY]
+END";
             var create = dba.ExecuteNonQuery(createTableScript);
 
             Log.Information("Create 404 handler redirects table END");
