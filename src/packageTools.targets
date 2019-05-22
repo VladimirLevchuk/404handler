@@ -6,12 +6,13 @@
         <NuGetExe>$(SolutionDir)\.nuget\NuGet.exe</NuGetExe>
         <TmpOutDir>$(SolutionDir)\tmp</TmpOutDir>
         <NuspecFile>$(ProjectDir)\$(ProjectName).nuspec</NuspecFile>
+        <CsprojFile>$(ProjectDir)\$(ProjectName).csproj</CsprojFile>
         <PackageOutDir>$(SolutionDir)</PackageOutDir>
     </PropertyGroup>
 
 	<PropertyGroup>
 		<NugetCommand>
-			"$(NuGetExe)" pack "$(NuspecFile)" -OutputDirectory "$(PackageOutDir.TrimEnd('\\'))" -Version $(PackageVersion) -Properties Configuration=$(Configuration)
+			"$(NuGetExe)" pack "$(CsprojFile)" -Symbols -OutputDirectory "$(PackageOutDir.TrimEnd('\\'))" -Properties Configuration=$(Configuration)
 		</NugetCommand>
 	</PropertyGroup>
 	
@@ -35,5 +36,7 @@
             </Code>
         </Task>
     </UsingTask>
+
+	
 
 </Project>
